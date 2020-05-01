@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   SideNav: boolean = false;
   visibleChat: boolean = JSON.parse(localStorage.getItem('visibleChat')) ;
 
-  isAuthenticated:boolean = true;
+  isAuthenticated:boolean = false;
   auth: OauthUser;
 
   notificationNumber: number;
@@ -46,15 +46,15 @@ export class AppComponent implements OnInit {
           var clean_uri = uri.substring(0, uri.indexOf("?"));
           window.history.replaceState({}, document.title, clean_uri);
       }
-    this.auth = JSON.parse(localStorage.getItem('auth'))
-    /* this.oauthUserService.getOauthUser()
+    //this.auth = JSON.parse(localStorage.getItem('auth'))
+    this.oauthUserService.getOauthUser()
       .subscribe( res =>{ 
         if(res != undefined && res != null) {      
         this.auth = res as OauthUser;
         this.isAuthenticated = true;
         localStorage.setItem('auth', JSON.stringify(res) )
         localStorage.setItem('isAuthenticated', JSON.stringify(this.isAuthenticated) )
-      }})  */
+      }}) 
 
       this.getNnotificationNumber();
       this.getRequestNumber();
