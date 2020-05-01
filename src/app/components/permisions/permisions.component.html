@@ -1,0 +1,55 @@
+<form [formGroup]="nameCtrl" (ngSubmit)="onSubmit($event)" >
+    <div>
+    <mat-form-field appearance="fill" class="example-chip-list">
+        <mat-chip-list #chipList aria-label="name selection">
+          <mat-chip
+            *ngFor="let name of names"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="removeName(name)">
+            {{name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Otorgar permisos a:"
+            #nameInput
+            formControlName="name"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="addName($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedName($event)">
+          <mat-option *ngFor="let name of filterednames | async" [value]="name">
+            {{name}}
+          </mat-option>
+        </mat-autocomplete>
+        <button class="submit-success" *ngIf="names.length >= 1" mat-raised-button type="submit" style="margin-right: 2vh;">
+            <mat-icon>done</mat-icon> Guardar
+        </button>
+    </mat-form-field>        
+    </div>
+    <div>
+        <mat-list>
+            <div mat-subheader>Permisos</div>
+            <mat-list-item *ngFor="let permision of aceptedPermisions">
+              <mat-icon mat-list-icon class="acepted">how_to_reg</mat-icon>
+              <div mat-line><span>Name:</span> {{permision.withPermisions.name}} <span class="spacer"></span> <span>Artículo:</span> {{permision.document.name}}</div>
+              <div mat-line class="description"> {{permision.createdAt | amLocale:'en' | amDateFormat:'MMMM Do YYYY'}} </div>
+              <button mat-icon-button class="button" matTooltip="eliminar permiso">
+                <mat-icon *ngIf="permision.withPermisions.name != auth.name" (click)="deletePermision(permision._id)" class="option-icon">delete_forever</mat-icon>
+              </button>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <div mat-subheader>Permisos Pendientes</div>
+            <mat-list-item *ngFor="let permision of pendingPermisions">
+              <mat-icon mat-list-icon class="pending">warning</mat-icon>
+              <div mat-line><span>Name:</span> {{permision.withPermisions.name}} <span class="spacer"></span> <span>Artículo:</span> {{permision.document.name}}</div>
+              <div mat-line class="description"> {{permision.createdAt | amLocale:'en' | amDateFormat:'MMMM Do YYYY'}} </div>
+              <button mat-icon-button class="button" matTooltip="cancelar permiso">
+                <mat-icon (click)="deletePermision(permision._id)" class="option-icon">delete_forever</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+    </div>
+  </form>

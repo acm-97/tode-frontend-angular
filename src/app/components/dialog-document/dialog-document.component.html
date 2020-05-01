@@ -1,0 +1,41 @@
+<div *ngIf="!version.paramsId" >
+    <h1 mat-dialog-title >Inserte un nombre para el documento</h1>
+    <form [formGroup]="formDoc" (ngSubmit)="onSubmit(formDoc.value)">
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline" MatFormFieldControl style="width: 100%;">
+            <mat-label>Nombre</mat-label>
+            <input type="text" formControlName="name" matInput placeholder="Ej: Artículo Científico" [errorStateMatcher]="matcher"> 
+            <mat-error *ngIf="formDoc.get('name').hasError('required')">
+                Nombre es<strong>requerido</strong>
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button class="submit-success" [disabled]="!formDoc.valid" mat-raised-button type="submit"  [mat-dialog-close]="formDoc.value.name" >Guardar 
+        </button>
+        <button color="warn" [mat-dialog-close] [routerLink]="['/documents']" mat-raised-button >Cancelar
+        </button>
+    </div>
+    </form>
+</div>
+
+<div *ngIf="version.paramsId">
+    <h1 mat-dialog-title >Inserte un comentario para identificar el documento</h1>
+    <form [formGroup]="formComent" (ngSubmit)="onSubmit(formComent.value)">
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline" MatFormFieldControl style="width: 100%;">
+            <mat-label>Nombre</mat-label>
+            <input type="text" formControlName="comment" matInput placeholder="Ej: Version 2" [errorStateMatcher]="matcher"> 
+            <mat-error *ngIf="formComent.get('comment').hasError('required')">
+                Nombre es<strong>requerido</strong>
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button class="submit-success" [disabled]="!formComent.valid" mat-raised-button type="submit"  [mat-dialog-close]="formComent.value.comment" >Guardar 
+        </button>
+        <button color="warn" [mat-dialog-close]  mat-raised-button >Cancelar
+        </button>
+    </div>
+    </form>
+</div>

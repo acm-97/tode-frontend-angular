@@ -1,0 +1,27 @@
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.mat-form-field {
+  margin-right: 12px;
+}
+
+table{
+  width: 200vh;
+}
+
+.mat-header{
+  text-align: center;
+}
+
+td{
+  text-align: center;
+}
+
+.mat-colum{
+  border-right: 1px solid #e0e0e0;
+}
+
+.option-icon {  
+  color: teal;
+}

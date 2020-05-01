@@ -1,0 +1,23 @@
+/* div{
+    width: 90vh;
+} */
+
+.description{
+    color: grey;
+}
+
+.content{
+    color: teal;
+}
+
+.option-acept{
+    background-color: green;
+    color: whitesmoke;
+    border-radius: 3vh;
+}
+
+.option-close{
+    background-color: red;
+    color: whitesmoke;
+    border-radius: 3vh;
+}

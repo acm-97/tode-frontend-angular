@@ -1,0 +1,20 @@
+<div>
+    <mat-list>
+        <div mat-subheader *ngIf="requests.length === 0 else  messages" >Sin Solicitudes</div>
+        <ng-template  #messages>
+        <mat-list-item *ngFor="let message of requests">
+          <div mat-line >{{message.notification}}</div>
+          <div mat-line class="content"> <span class="description">Artículo: </span>{{message.document.name}}</div>
+          <div mat-line >
+            <button mat-icon-button matTooltip="aceptar petición"  class="button">
+                <mat-icon class="option-acept" (click)="updateNotificationForPermisions(message.document._id, message.document.name)">check</mat-icon>  
+              </button>
+              <button mat-icon-button matTooltip="cancelar petición"  class="button">
+                <mat-icon class="option-close" (click)="deleteNotification(message.document._id)"> close</mat-icon>  
+              </button>
+              <span class="description"> {{message.createdAt | amLocale:'en' | amDateFormat:'MMMM Do YYYY'}}</span>  </div>
+        </mat-list-item>
+        </ng-template>
+        <mat-divider></mat-divider>
+      </mat-list>
+</div>

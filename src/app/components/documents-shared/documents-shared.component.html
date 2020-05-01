@@ -1,0 +1,60 @@
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- Artículo Column -->
+      <ng-container matColumnDef="article">
+        <th mat-header-cell *matHeaderCellDef class="mat-header"> Artículo </th>
+        <td mat-cell *matCellDef="let element" class="mat-colum"> {{element.document.name}} </td>
+      </ng-container>
+  
+      <!-- Autor Column -->
+      <ng-container matColumnDef="autor">
+        <th mat-header-cell *matHeaderCellDef class="mat-header"> Creado por: </th>
+        <td mat-cell *matCellDef="let element" class="mat-colum"> {{element.autor.name}} </td>
+      </ng-container>
+  
+      <!-- Editor Column -->
+      <ng-container matColumnDef="editor">
+        <th mat-header-cell *matHeaderCellDef class="mat-header"> Editado por: </th>
+        <td mat-cell *matCellDef="let element" class="mat-colum"> {{element.editor.name}} </td>
+      </ng-container>
+  
+      <!-- Comentario Column -->
+      <ng-container matColumnDef="coment">
+        <th mat-header-cell *matHeaderCellDef class="mat-header"> Comentario </th>
+        <td mat-cell *matCellDef="let element" class="mat-colum"> {{element.coment}} </td>
+      </ng-container>
+
+      <!-- Fecha Column -->
+      <ng-container matColumnDef="updatedAt" >
+        <th mat-header-cell *matHeaderCellDef class="mat-header"> Ultima actualización </th>
+        <td mat-cell *matCellDef="let element" class="mat-colum"> {{element.updatedAt | amLocale:'en' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}} </td>
+      </ng-container>
+
+      <!-- Opciones Column -->
+      <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef class="mat-header"> Opciones </th>
+        <td mat-cell *matCellDef="let element"> 
+          <button mat-icon-button class="button" matTooltip="ver contenido">
+            <mat-icon class="option-icon" >visibility</mat-icon>  
+          </button>
+          <button mat-icon-button matTooltip="ver contenido" (click)="openBottomSheet(element.document._id)" class="button">
+            <mat-icon class="option-icon" >view_list</mat-icon>  
+          </button>
+          <button mat-icon-button class="button" matTooltip="editar contenido">
+            <mat-icon [routerLink]="['/edit-document', element._id]" class="option-icon">edit</mat-icon>  
+          </button>
+          <button mat-icon-button class="button" matTooltip="abandonar artículo">
+            <mat-icon (click)="cancelPermision(element.document._id)" class="option-icon">remove_circle</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+

@@ -1,0 +1,16 @@
+<div>
+    <mat-list>
+        <ng-template>
+        <mat-list-item *ngFor="let message of messagesList">
+          <mat-icon mat-list-icon class="mat-list-icon">fiber_manual_record</mat-icon>
+          <div mat-line>{{message.sender.name}}</div>
+          <div mat-line class="description"> {{message.content}}</div>
+        </mat-list-item>
+        </ng-template>
+        <mat-divider></mat-divider>
+    </mat-list>
+    <mat-form-field appearance="outline" MatFormFieldControl style="width: 100vh;">
+    <textarea [(ngModel)]="content" type="text" matInput placeholder="" rows="5" (keyup)="$event.keyCode == 13 && sendMessage()"> 
+    </textarea>
+</mat-form-field>
+</div>

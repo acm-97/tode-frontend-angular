@@ -1,0 +1,15 @@
+<div>
+    <mat-list>
+        <div mat-subheader *ngIf="notifications.length == 0 else  messages" >Sin Notificaciones</div>
+        <ng-template  #messages>
+        <mat-list-item *ngFor="let message of notifications">
+          <mat-icon mat-list-icon class="mat-list-icon" *ngIf="message.notificationSied == false">fiber_manual_record</mat-icon>
+          <div mat-line>{{message.notification}}</div>
+          <div mat-line > <span class="description">Artículo: </span><a mat-button class="content" (click)="updateNotificationStatus( message.document._id, message.document_version)">{{message.document.name}}</a></div>
+          <div mat-line class="description"> {{message.createdAt | amLocale:'en' | amDateFormat:'MMMM Do YYYY'}} </div>
+        </mat-list-item>
+        </ng-template>
+        <mat-divider></mat-divider>
+      </mat-list>
+      <a mat-button class="content" (click)="updateAllStatus()">marcar todos como visto</a>
+</div>

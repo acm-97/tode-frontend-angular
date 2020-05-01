@@ -1,0 +1,5 @@
+export {ChatService} from './chat.service'
+export {DocumentsService} from './documents.service'
+export {NotificationsService} from './notifications.service'
+export {OauthUserService} from './oauth-user.service'
+export {PermisionsService} from './permisions.service'

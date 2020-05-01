@@ -1,0 +1,15 @@
+.description{
+    color: grey;
+}
+
+.content{
+    color: teal;
+    min-width: 0;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.mat-list-icon{
+    color: teal;
+}

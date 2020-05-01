@@ -1,0 +1,27 @@
+div{
+    -ms-flex: 1;  /* IE 10 */  
+  flex: 1;
+}
+
+#logo{
+    width: 50%;
+    height: 50%;
+    
+}
+#logo1{
+    width: 50%;
+    height: 50%;
+}
+
+#text1{
+    text-align: center;
+    color: #1d324e;
+}
+
+#text2{
+    text-decoration: #1d324e;
+    text-decoration-line: underline;
+    text-align: center;
+    color: #de0023;
+    text-decoration-style: solid
+}

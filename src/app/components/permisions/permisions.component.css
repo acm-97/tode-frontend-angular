@@ -1,0 +1,35 @@
+.example-chip-list {
+    width: 100vh;
+  }
+
+.submit-success{
+  background-color: green;
+  color: white;
+  margin-left: 101vh;
+}
+
+.description{
+  color: grey;
+  text-decoration-line: underline;
+}
+
+.acepted{
+  color: green;
+}
+
+.pending{
+  color: orange;
+}
+
+.button{
+  color: crimson;
+}
+span{
+  color: teal;
+  font-style: italic;
+}
+
+.spacer{
+  margin-left: 5vh;
+  margin-right: 5vh;
+}
