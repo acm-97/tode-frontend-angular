@@ -6,9 +6,10 @@ import {HomeComponent,
   DocumentsSharedComponent,
   CreateDocumentComponent,
   OauthUserComponent,
-  PermisionsComponent} from './components/index'
+  PermisionsComponent,
+  TextureComponent} from './components/index'
 import {OauthGuard} from './oauth.guard'
-
+import {ChatComponent} from './components/chat/chat.component'
 const routes: Routes = [
   { path: '', 
     component: HomeComponent 
@@ -36,6 +37,14 @@ const routes: Routes = [
   { path: 'permisions/:id', 
     component: PermisionsComponent, 
     canActivate:[OauthGuard] 
+  },
+  { path: 'texture', 
+    component: TextureComponent, 
+    /* canActivate:[OauthGuard] */ 
+  },
+  { path: 'chat', 
+    component: ChatComponent, 
+    /* canActivate:[OauthGuard] */ 
   },
 
 ];

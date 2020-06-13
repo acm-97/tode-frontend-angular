@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router"
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import qs from 'qs'
 
 import {NotificationsComponent} from './components/index'
 import {OauthUserService} from './services/oauth-user.service'
 import {OauthUser} from './models/oauth-user'
 import { NotificationsService } from './services/notifications.service';
+import {ChatComponent} from './components/chat/chat.component'
 
 @Component({
   selector: 'app-root',
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit {
   requestNumber: number;
   
   constructor(
+      private _bottomSheet: MatBottomSheet,
       public notificationService: NotificationsService,
       private oauthUserService: OauthUserService,
       private router: Router) {
@@ -60,6 +63,10 @@ export class AppComponent implements OnInit {
       this.getRequestNumber();
   }
 
+  openBottomSheet(): void {
+    this._bottomSheet.open(ChatComponent);
+  }
+  
   logout():void{
     this.isAuthenticated = false;
     localStorage.clear();

@@ -13,6 +13,7 @@ import { OauthUserComponent,
   HomeComponent,
   DialogDocumentComponent,
   RequestsComponent } from './components/index';
+import {ChatService} from './services/chat.service'
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,6 +45,8 @@ import { MomentModule } from 'ngx-moment';
 import { BottomSheetCommentComponent } from './components/bottom-sheet-comment/bottom-sheet-comment.component';
 import { InterceptorService } from './services/interceptor.service';
 import { MessageSnackBarService } from './services/message-snack-bar.service';
+import { DynamicScriptLoaderService } from './services/dynamic-script-loader-service.service';
+import { TextureComponent } from './components/texture/texture.component';
 
 
 
@@ -60,7 +63,8 @@ import { MessageSnackBarService } from './services/message-snack-bar.service';
     DocumentsSharedComponent,
     DialogDocumentComponent,
     BottomSheetCommentComponent,
-    RequestsComponent
+    RequestsComponent,
+    TextureComponent
   ],
   imports: [
     //AngularModules
@@ -102,6 +106,8 @@ import { MessageSnackBarService } from './services/message-snack-bar.service';
     })
   ],
   providers: [
+    ChatService,
+    DynamicScriptLoaderService,
     MessageSnackBarService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
   ],

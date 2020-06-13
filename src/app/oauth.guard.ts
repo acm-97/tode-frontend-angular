@@ -9,9 +9,7 @@ export class OauthGuard implements CanActivate {
 
   isAuthenticated = JSON.parse(localStorage.getItem("isAuthenticated"))
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(): boolean {
     return this.isAuthenticated;
   }
   

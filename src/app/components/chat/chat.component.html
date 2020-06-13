@@ -1,16 +1,108 @@
-<div>
-    <mat-list>
-        <ng-template>
-        <mat-list-item *ngFor="let message of messagesList">
-          <mat-icon mat-list-icon class="mat-list-icon">fiber_manual_record</mat-icon>
-          <div mat-line>{{message.sender.name}}</div>
-          <div mat-line class="description"> {{message.content}}</div>
-        </mat-list-item>
-        </ng-template>
-        <mat-divider></mat-divider>
-    </mat-list>
-    <mat-form-field appearance="outline" MatFormFieldControl style="width: 100vh;">
-    <textarea [(ngModel)]="content" type="text" matInput placeholder="" rows="5" (keyup)="$event.keyCode == 13 && sendMessage()"> 
-    </textarea>
-</mat-form-field>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MeanChat</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+<div ><!-- class="container" -->
+  <div ><!-- class="row" -->
+      <div ><!-- class="col-md-5" -->
+          <div class="panel panel-primary" *ngIf="joinned; else joinroom">
+              <div class="panel-heading">
+                  <span class="glyphicon glyphicon-comment"></span> {{ msgData.room }}
+                  <div class="btn-group pull-right">
+                      <button type="button" class="btn btn-default btn-xs" (click)="logout()">
+                          Logout
+                      </button>
+                  </div>
+              </div>
+              <div #scrollMe class="panel-body">
+                  <ul class="chat">
+                      <li *ngFor="let c of chats">
+                        <div class="left clearfix" *ngIf="c.nickname===msgData.nickname; else rightchat">
+                          <span class="chat-img pull-left">
+                            <img src="http://placehold.it/50/55C1E7/fff&text=ME" alt="User Avatar" class="img-circle" />
+                          </span>
+                          <div class="chat-body clearfix">
+                              <div class="header">
+                                  <strong class="primary-font">{{ c.nickname }}</strong> <small class="pull-right text-muted">
+                                      <span class="glyphicon glyphicon-time"></span>{{ c.updated_at | date: 'medium' }}</small>
+                              </div>
+                              <p>{{ c.message }}</p>
+                          </div>
+                        </div>
+                        <ng-template #rightchat>
+                          <div class="right clearfix">
+                            <span class="chat-img pull-right">
+                              <img src="http://placehold.it/50/FA6F57/fff&text=U" alt="User Avatar" class="img-circle" />
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{ c.updated_at | date: 'medium' }}</small>
+                                    <strong class="pull-right primary-font">{{ c.nickname }}</strong>
+                                </div>
+                                <p>{{ c.message }}</p>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </li>
+                  </ul>
+              </div>
+              <div class="panel-footer">
+                <form (ngSubmit)="sendMessage()" #msgForm="ngForm">
+                  <div class="input-group">
+                      <input type="hidden" [(ngModel)]="msgData.room" name="room" />
+                      <input type="hidden" [(ngModel)]="msgData.nickname" name="nickname" />
+                      <input id="btn-input" type="text" [(ngModel)]="msgData.message" name="message" class="form-control input-sm" placeholder="Type your message here..." required="" />
+                      <span class="input-group-btn">
+                          <button class="btn btn-warning btn-sm" id="btn-chat" [disabled]="!msgForm.form.valid">
+                              Send</button>
+                      </span>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <ng-template #joinroom>
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                <h1>Select Chat Room</h1>
+                <form (ngSubmit)="joinRoom()" #joinForm="ngForm">
+                  <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" [(ngModel)]="newUser.nickname" name="nickname" placeholder="Nickname" required="" />
+                  </div>
+                  <div class="form-group">
+                    <label>Sala de Chat</label>
+                    <select class="form-control" [(ngModel)]="newUser.room" name="room" required="">
+                      <option [disabled]="disabled">Seleccione una Sala de Chat</option>
+                      <option (click)="toogleDisable()" *ngFor="let doc of documentService.documents">{{doc.name}}</option><!-- 
+                      <option value="Javascript">Javascript</option>
+                      <option value="Java">Java</option>
+                      <option value="Python">Python</option> -->
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-success" [disabled]="!joinForm.form.valid">Join</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </ng-template>
+      </div>
+  </div>
 </div>
+ <!-- jQuery library -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+ <!-- Latest compiled and minified JavaScript -->
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>

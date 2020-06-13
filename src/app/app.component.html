@@ -21,7 +21,8 @@
       </mat-menu>
   
       <!-- button menu for messages. -->
-      <button mat-icon-button *ngIf="visibleChat == true" [matMenuTriggerFor]="messages" class="button">
+      <!-- *ngIf="visibleChat == true" [matMenuTriggerFor]="messages"  -->        
+      <button mat-icon-button class="button" (click)="openBottomSheet()">
         <mat-icon >message</mat-icon>
       </button>
       <mat-menu #messages="matMenu">
@@ -63,7 +64,7 @@
       
       <span class="example-spacer"></span>
   
-      <a class="login-link" mat-button href='https://192.168.1.100:4000/api/oauth2'> <mat-icon color="primary">person</mat-icon> Login with SCEIBA</a>
+      <a class="login-link" mat-button href='https://192.168.1.103:4000/api/oauth2'> <mat-icon color="primary">person</mat-icon> Login with SCEIBA</a>
     </mat-toolbar-row>
   </mat-toolbar>
 </ng-template>
@@ -87,6 +88,11 @@
           <a class="sidenav-link" mat-button [routerLink]="['/create-document']" (click)="drawer.toggle()"><mat-icon color="primary">library_add</mat-icon> Nuevo Documento</a>
         </div>
       </section>
+      <section>
+        <div class="example-button-row">
+          <a class="sidenav-link" mat-button [routerLink]="['/texture']" (click)="drawer.toggle()"><mat-icon color="primary">library_add</mat-icon> Texture</a>
+        </div>
+      </section>
       <mat-divider></mat-divider>
   </mat-drawer>
 
@@ -97,23 +103,23 @@
 </mat-drawer-container>
 
 
-<mat-drawer-container class="example-container" autosize backdropClick>
-  <mat-drawer #drawer class="example-sidenav" mode="over" position="end">
+<!-- <mat-drawer-container class="example-container" autosize backdropClick>
+  <mat-drawer #drawerChat class="example-sidenav" mode="over" position="end">
       <section>
         <div class="example-button-row">
-          <a class="sidenav-link" mat-button [routerLink]="['/documents']" (click)="drawer.toggle()"> <mat-icon color="primary">folder</mat-icon> Biblioteca</a>
+          <a class="sidenav-link" mat-button [routerLink]="['/documents']" (click)="drawerChat.toggle()"> <mat-icon color="primary">folder</mat-icon> Biblioteca</a>
         </div>
       </section>
       <mat-divider></mat-divider>
       <section>
         <div class="example-button-row">
-          <a class="sidenav-link" mat-button [routerLink]="['/documents-shared']" (click)="drawer.toggle()"><mat-icon color="primary">folder_shared</mat-icon> Biblioteca Compartida</a>
+          <a class="sidenav-link" mat-button [routerLink]="['/documents-shared']" (click)="drawerChat.toggle()"><mat-icon color="primary">folder_shared</mat-icon> Biblioteca Compartida</a>
         </div>
       </section>
       <mat-divider></mat-divider>
       <section>
         <div class="example-button-row">
-          <a class="sidenav-link" mat-button [routerLink]="['/create-document']" (click)="drawer.toggle()"><mat-icon color="primary">library_add</mat-icon> Nuevo Documento</a>
+          <a class="sidenav-link" mat-button [routerLink]="['/create-document']" (click)="drawerChat.toggle()"><mat-icon color="primary">library_add</mat-icon> Nuevo Documento</a>
         </div>
       </section>
       <mat-divider></mat-divider>
@@ -123,4 +129,4 @@
     <app-chat></app-chat>
   </div>
 
-</mat-drawer-container>
+</mat-drawer-container> -->
